@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Blog by Christian F Jung]]></title><description><![CDATA[Blog by Christian F Jung]]></description><link>https://blog.christianfjung.com</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 17 Feb 2020 20:43:11 GMT</lastBuildDate><item><title><![CDATA[Notebooks to Web Apps]]></title><description><![CDATA[Learn how to convert Jupyter Notebooks to a Web App using Streamlit.]]></description><link>https://blog.christianfjung.com/posts/notebooks-to-web-apps</link><guid isPermaLink="false">https://blog.christianfjung.com/posts/notebooks-to-web-apps</guid><pubDate>Mon, 03 Feb 2020 23:46:37 GMT</pubDate><content:encoded>&lt;h1 id=&quot;notebooks-to-web-apps&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#notebooks-to-web-apps&quot; aria-label=&quot;notebooks to web apps permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Notebooks to Web Apps&lt;/h1&gt;
+&lt;p&gt;I love Jupyter notebooks!  If I have the choice to code in a notebook vs another IDE, I will also choose a notebook! Recently, a new python library was released called &lt;a href=&quot;https://www.streamlit.io/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Streamlit&lt;/a&gt; that lets you make really cool web apps quickly and simply.  By default, &lt;a href=&quot;https://www.streamlit.io/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Streamlit&lt;/a&gt; only works with .py files and built in Jupyter functions cause errors :(  But with a little extra work, we can get it to work  in Jupyter. &lt;/p&gt;
+&lt;p&gt;First let’s import our data and make a streamlit bar graph. &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;For this example, we will be making a web app that shows Presidential Candidates’s Online Attention.&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;df_online&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;pd&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;read_csv&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/media-mentions-2020/online_weekly.csv&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+df_online&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;head&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 960px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/8e2c36b16a4c6c016ca930061217f91f/eee07/image-20200206142548639.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 22.48157248157248%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA5UlEQVQY0y2Q207DMBBE+///hcQDQlBaAk3SNnFuttPcUyqR+LCxWHm0Y49m5dndOo8sAudWhr7jPk88fu7caovRFboqPd96VRaee03uRZ5RW4NbF6ZxoOtadkg5QVpajuGV77PieLpIz8hMS5gUxKpC6ZZzpjldc8+VbgjilH0QEaUl758RqjQy0Dk5TkyatyDmECY8vx74uuT0D4gzS1K1nuf1SKQMzbzS3FfRjPd8nK48vexJC/v/QxnYNjfKIsdKzEyltLcaJMogMbY4uIV5GmnkfV1+PTrxbGuwRqPShL7r+AOgWCuwZpW16AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/8e2c36b16a4c6c016ca930061217f91f/8ac56/image-20200206142548639.webp 240w,
+/static/8e2c36b16a4c6c016ca930061217f91f/d3be9/image-20200206142548639.webp 480w,
+/static/8e2c36b16a4c6c016ca930061217f91f/e46b2/image-20200206142548639.webp 960w,
+/static/8e2c36b16a4c6c016ca930061217f91f/f992d/image-20200206142548639.webp 1440w,
+/static/8e2c36b16a4c6c016ca930061217f91f/55e7f/image-20200206142548639.webp 1628w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/8e2c36b16a4c6c016ca930061217f91f/8ff5a/image-20200206142548639.png 240w,
+/static/8e2c36b16a4c6c016ca930061217f91f/e85cb/image-20200206142548639.png 480w,
+/static/8e2c36b16a4c6c016ca930061217f91f/d9199/image-20200206142548639.png 960w,
+/static/8e2c36b16a4c6c016ca930061217f91f/07a9c/image-20200206142548639.png 1440w,
+/static/8e2c36b16a4c6c016ca930061217f91f/eee07/image-20200206142548639.png 1628w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/8e2c36b16a4c6c016ca930061217f91f/d9199/image-20200206142548639.png&quot;
+          alt=&quot;image-20200206142548639&quot;
+          title=&quot;image-20200206142548639&quot;
+          loading=&quot;lazy&quot;
+          style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let’s process our data  so we can get number of stories and the candidate in one data frame. &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;dfO&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; df_online&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;name&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;matched_stories&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+
+dfO&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; dfO&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;groupby&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;matched_stories&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+dfO &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; pd&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;DataFrame&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;dfO&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+dfToShow&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; dfO&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;sort_values&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;matched_stories&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; ascending&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+dfToShow&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;head&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;gatsby-resp-image-wrapper&quot; style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 656px;&quot;&gt;
+      &lt;a class=&quot;gatsby-resp-image-link&quot; href=&quot;/static/59ba460e6c4fa597eff33601850f88e0/748f4/image-20200206142857331.png&quot; style=&quot;display: block&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;
+    &lt;span class=&quot;gatsby-resp-image-background-image&quot; style=&quot;padding-bottom: 63.71951219512195%; position: relative; bottom: 0; left: 0; background-image: url(&amp;apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAAByklEQVQ4y5VTa7OaQAz1//+nfui0dnxcwSkocPWCoFDfvESFhT3dpBfb62g73ZlM1iSeTc4JnTo9ovRnqLYhxH4NWZWgI6W8+db+dtp8p7leIJI96ixBU2SQdQ15B9QW53kOwzCgaRqm0ynm8zl0XYfneTfQDv7jlGWJ1WoF3/cRhiGiKMJyucRut/sN+KGLdy+EQFVVqFW3dB8MBuj1ehz758j3AQKhF7fbLXfRjmWaJsdaW6/XsG0bk8mEO26a5jEgJS6XC/8+HA7MFYGRP5/PbJQ/nU7MJz1GYz/ssA1SsWVZWCwWXOy6Hnt6TP5BSxAEXPOBw0eAaZpy8UqNTOO4rotAARIIGdFCAhEYUbLZbJ4Avt8dx4Y2GkFX6+EonsbjsRp5ojrPUajui+KELEs53+12eW2eiiIaiSAW0F4jDK0A+izCi73EyAmxOFac88mOAn3TwxfNhuFtULMm8h5Qoqol3GOD4esPfNZm+PrdwzczQNdQ4+0F3lTu7dDAjSXHPg3VBO7uGeAvlVtRNKUgfRX9fh8vigL6UihHRnfHcRQVFvP7dG3I0wLnWYY4jpEkCe8dEX+9XjlXKUFIlEzVZErAoihu//8JzXLfwUZ8CZ8AAAAASUVORK5CYII=&amp;apos;); background-size: cover; display: block;&quot;&gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source srcset=&quot;/static/59ba460e6c4fa597eff33601850f88e0/8ac56/image-20200206142857331.webp 240w,
+/static/59ba460e6c4fa597eff33601850f88e0/d3be9/image-20200206142857331.webp 480w,
+/static/59ba460e6c4fa597eff33601850f88e0/31099/image-20200206142857331.webp 656w&quot; sizes=&quot;(max-width: 656px) 100vw, 656px&quot; type=&quot;image/webp&quot;&gt;
+        &lt;source srcset=&quot;/static/59ba460e6c4fa597eff33601850f88e0/8ff5a/image-20200206142857331.png 240w,
+/static/59ba460e6c4fa597eff33601850f88e0/e85cb/image-20200206142857331.png 480w,
+/static/59ba460e6c4fa597eff33601850f88e0/748f4/image-20200206142857331.png 656w&quot; sizes=&quot;(max-width: 656px) 100vw, 656px&quot; type=&quot;image/png&quot;&gt;
+        &lt;img class=&quot;gatsby-resp-image-image&quot; src=&quot;/static/59ba460e6c4fa597eff33601850f88e0/748f4/image-20200206142857331.png&quot; alt=&quot;image-20200206142857331&quot; title=&quot;image-20200206142857331&quot; loading=&quot;lazy&quot; style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+&lt;p&gt;Now, let’s import streamlit and make a bar chart. &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; streamlit &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; st
+st&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;bar_chart&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;dfToShow&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you have a markdown cell, switch it to a code cell and surround it with triple quotes &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token triple-quoted-string string&quot;&gt;&apos;&apos;&apos;
+# Creating Web Apps with JN and Streamlit
+## Christian F. Jung
+christianfjung.com
+
+**About this Project** 
+
+This project uses live poll data from 538 so the website will be update constantly!
+
+&apos;&apos;&apos;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We’ve done our preprocessing, added text, and  we’ve made a bar chart with streamlit. Now it’s time to make the app!&lt;/p&gt;
+&lt;p&gt;For an easy one line solution, use this script that I made. Replace &lt;code class=&quot;language-text&quot;&gt;YOURNOTEBOOKNAME&lt;/code&gt; with the name of your .ipynb; &lt;em&gt;(do not include the file extension)&lt;/em&gt;. Save your notebook, then run the following cell. &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;! curl  https&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;//&lt;/span&gt;scripts&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;christianfjung&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;com&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;JN&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;ST&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;sh &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; bash &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;s YOURNOTEBOOKNAME&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you prefer to write the script yourself use the following code instead:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;!jupyter nbconvert   &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;to script YOURNOTEBOOKNAME&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ipynb
+!awk &lt;span class=&quot;token string&quot;&gt;&apos;!/ipython/&apos;&lt;/span&gt; YOURNOTEBOOKNAME&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;py &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;  temp&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;py &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt; mv temp&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;py app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;py &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt; rm YOURNOTEBOOKNAME&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;py
+!streamlit run app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;py&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;HOORAY!&lt;/strong&gt; You now have a running web app and will see a screen that looks like this! Visit the local url to see your site in action. &lt;em&gt;(The cell will continue to run so the site stays active, to stop the site, stop the cell).&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 960px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a46ea6643d5012a10d35f27899ae2f4b/187fa/image-20200206144336077.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 25.628140703517587%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAAA5ElEQVQY012QiW7CMBBE+f9/awuEo9xQVRUJcRJfwomDXx1TEOpIo1nvakezHoUQMMagdaS501ob3zr1H/XrTKn7TCmV6Jx7ckTEerUim06YzzKWiznHw57P5YL9bst2s06913pQoxWyqRBCMIQaMGgyNFeP0G1iIR2V7bmojjpqLjty5VNdyJZSOUrdUWgf2XO34mmaDJ0PiLhQmltcaMmFJK8t51Lyc5F8Fw1noTAd2Dagrj2N9VSx4fvb0/AvYUC6wKYMnBr4qnsm43E6eZZN+Xh/S18xyyacjge0kvzHI92AX+GUfQnehEtZAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/a46ea6643d5012a10d35f27899ae2f4b/8ac56/image-20200206144336077.webp 240w,
+/static/a46ea6643d5012a10d35f27899ae2f4b/d3be9/image-20200206144336077.webp 480w,
+/static/a46ea6643d5012a10d35f27899ae2f4b/e46b2/image-20200206144336077.webp 960w,
+/static/a46ea6643d5012a10d35f27899ae2f4b/de1dc/image-20200206144336077.webp 1194w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/a46ea6643d5012a10d35f27899ae2f4b/8ff5a/image-20200206144336077.png 240w,
+/static/a46ea6643d5012a10d35f27899ae2f4b/e85cb/image-20200206144336077.png 480w,
+/static/a46ea6643d5012a10d35f27899ae2f4b/d9199/image-20200206144336077.png 960w,
+/static/a46ea6643d5012a10d35f27899ae2f4b/187fa/image-20200206144336077.png 1194w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/a46ea6643d5012a10d35f27899ae2f4b/d9199/image-20200206144336077.png&quot;
+          alt=&quot;image-20200206144336077&quot;
+          title=&quot;image-20200206144336077&quot;
+          loading=&quot;lazy&quot;
+          style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h4 id=&quot;what-does-the-script-do&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#what-does-the-script-do&quot; aria-label=&quot;what does the script do permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;What does the script do?&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;Converts NB to .py: &lt;code class=&quot;language-text&quot;&gt;jupyter nbconvert   --to script YOURNAME.ipynb&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Removes all ipython com&lt;/li&gt;
+&lt;li&gt;mands (includes the call to the script):
+&lt;code class=&quot;language-text&quot;&gt;awk &amp;#39;!/ipython/&amp;#39; YOURNAME.py &amp;gt;  temp.py &amp;amp;&amp;amp; mv temp.py app.py &amp;amp;&amp;amp; rm YOURNAME.py&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Runs the local streamlit app:&lt;code class=&quot;language-text&quot;&gt;streamlit run app.py&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;For a complete working example, check out my &lt;a href=&quot;https://github.com/ChristianFJung/NotebookToWebApp&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;GitHub repo&lt;/a&gt; for this article. &lt;/p&gt;
+&lt;p&gt;Share with me your web apps!  Feel free to ask questions and stayed tuned for my next article where we deploy this app to a website!&lt;/p&gt;</content:encoded></item></channel></rss>
