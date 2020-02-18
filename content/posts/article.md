@@ -16,8 +16,6 @@ socialImage: "/media/image-2.jpg"
 
 
 
-# Notebooks to Web Apps
-
 I love Jupyter notebooks!  If I have the choice to code in a notebook vs another IDE, I will also choose a notebook! Recently, a new python library was released called [Streamlit](https://www.streamlit.io/) that lets you make really cool web apps quickly and simply.  By default, [Streamlit](https://www.streamlit.io/) only works with .py files and built in Jupyter functions cause errors :(  But with a little extra work, we can get it to work  in Jupyter. 
 
 
