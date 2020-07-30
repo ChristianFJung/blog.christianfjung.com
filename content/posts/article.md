@@ -29,6 +29,8 @@ df_online=pd.read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/ma
 df_online.head()
 ```
 
+
+
 ![image-20200206142548639](article.assets/image-20200206142548639.png)
 
 Let's process our data  so we can get number of stories and the candidate in one data frame. 
@@ -108,7 +110,8 @@ If you prefer to write the script yourself use the following code instead:
 #### What does the script do?
 
 1. Converts NB to .py: `jupyter nbconvert   --to script YOURNAME.ipynb`
-2. Removes all ipython commands (includes the call to the script):
+2. Remove
+3. s all ipython commands (includes the call to the script):
    `awk '!/ipython/' YOURNAME.py >  temp.py && mv temp.py app.py && rm YOURNAME.py`
 4. Runs the local streamlit app:`streamlit run app.py`
 
