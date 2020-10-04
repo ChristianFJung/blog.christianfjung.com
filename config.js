@@ -31,7 +31,7 @@ module.exports = {
   author: {
     name: 'Christian F. Jung',
     photo: '/photo.jpg',
-    bio: '2nd year student at UVA interested in data and computer science.',
+    bio: 'UVA computer science student interested in DevOps and deep learning.',
     contacts: {
       email: 'cfj@christianfjung.com',
       facebook: '',
